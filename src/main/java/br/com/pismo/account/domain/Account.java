@@ -33,4 +33,12 @@ public class Account {
     public BigDecimal getAvailableWithdrawalLimit() {
         return availableWithdrawalLimit;
     }
+
+    void addAvailableCreditLimit(CreditLimit creditLimit) {
+        availableCreditLimit.add(creditLimit.getAmount());
+    }
+
+    void addAvailableWithdrawalLimit(WithdrawalLimit withdrawalLimit) {
+        availableWithdrawalLimit.add(withdrawalLimit.getAmount());
+    }
 }
