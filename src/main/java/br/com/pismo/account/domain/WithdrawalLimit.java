@@ -11,6 +11,6 @@ public class WithdrawalLimit {
     }
 
     public BigDecimal getAmount() {
-        return amount;
+        return amount != null ? amount : new BigDecimal(0);
     }
 }

@@ -18,8 +18,8 @@ public class Account {
     private BigDecimal availableWithdrawalLimit;
 
     public Account(CreditLimit availableCreditLimit, WithdrawalLimit availableWithdrawalLimit) {
-        this.availableCreditLimit = availableCreditLimit.getAmount();
-        this.availableWithdrawalLimit = availableWithdrawalLimit.getAmount();
+        this.availableCreditLimit = availableCreditLimit != null ? availableCreditLimit.getAmount() : new BigDecimal(0) ;
+        this.availableWithdrawalLimit = availableWithdrawalLimit != null ? availableWithdrawalLimit.getAmount() : new BigDecimal(0);
     }
 
     public Long getId() {
@@ -35,10 +35,14 @@ public class Account {
     }
 
     void addAvailableCreditLimit(CreditLimit creditLimit) {
-        this.availableCreditLimit = availableCreditLimit.add(creditLimit.getAmount());
+        if (creditLimit != null) {
+            this.availableCreditLimit = availableCreditLimit.add(creditLimit.getAmount());
+        }
     }
 
     void addAvailableWithdrawalLimit(WithdrawalLimit withdrawalLimit) {
-        this.availableWithdrawalLimit = availableWithdrawalLimit.add(withdrawalLimit.getAmount());
+        if (withdrawalLimit != null) {
+            this.availableWithdrawalLimit = availableWithdrawalLimit.add(withdrawalLimit.getAmount());
+        }
     }
 }

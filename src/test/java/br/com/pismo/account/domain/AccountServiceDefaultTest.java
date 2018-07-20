@@ -112,5 +112,14 @@ public class AccountServiceDefaultTest {
         service.findBy(1L);
     }
 
+    @Test
+    public void mustCreateAnAccountWithoutLimitsWhenGivenNullLimit() {
+        Mockito.when(accountRepository.save(Mockito.any(Account.class))).then(invocation -> invocation.getArguments()[0]);
+
+        Account accountPersisted = service.create(null, null);
+
+        Assert.assertEquals(new BigDecimal(0), accountPersisted.getAvailableCreditLimit());
+        Assert.assertEquals(new BigDecimal(0), accountPersisted.getAvailableWithdrawalLimit());
+    }
 
 }
