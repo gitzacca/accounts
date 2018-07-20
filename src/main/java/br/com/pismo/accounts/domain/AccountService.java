@@ -1,4 +1,4 @@
-package br.com.pismo.account.domain;
+package br.com.pismo.accounts.domain;
 
 import java.util.List;
 

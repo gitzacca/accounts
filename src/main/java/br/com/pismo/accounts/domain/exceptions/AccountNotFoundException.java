@@ -1,4 +1,4 @@
-package br.com.pismo.account.domain.exceptions;
+package br.com.pismo.accounts.domain.exceptions;
 
 public class AccountNotFoundException extends RuntimeException {
 

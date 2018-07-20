@@ -1,4 +1,4 @@
-package br.com.pismo.account.domain;
+package br.com.pismo.accounts.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -21,6 +21,8 @@ public class Account {
         this.availableCreditLimit = availableCreditLimit != null ? availableCreditLimit.getAmount() : new BigDecimal(0) ;
         this.availableWithdrawalLimit = availableWithdrawalLimit != null ? availableWithdrawalLimit.getAmount() : new BigDecimal(0);
     }
+
+    protected Account() {}
 
     public Long getId() {
         return id;

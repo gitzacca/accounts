@@ -1,4 +1,4 @@
-package br.com.pismo.account;
+package br.com.pismo.accounts;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

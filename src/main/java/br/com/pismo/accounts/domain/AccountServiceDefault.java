@@ -1,6 +1,6 @@
-package br.com.pismo.account.domain;
+package br.com.pismo.accounts.domain;
 
-import br.com.pismo.account.domain.exceptions.AccountNotFoundException;
+import br.com.pismo.accounts.domain.exceptions.AccountNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +42,6 @@ public class AccountServiceDefault implements AccountService {
 
     @Override
     public Account findBy(Long id) {
-        return repository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account not found"));
+        return repository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account with id: " + id + " not found"));
     }
 }

@@ -1,6 +1,6 @@
-package br.com.pismo.account.domain;
+package br.com.pismo.accounts.domain;
 
-import br.com.pismo.account.domain.exceptions.AccountNotFoundException;
+import br.com.pismo.accounts.domain.exceptions.AccountNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

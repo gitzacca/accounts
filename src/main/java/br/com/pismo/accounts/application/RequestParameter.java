@@ -1,7 +1,7 @@
-package br.com.pismo.account.application;
+package br.com.pismo.accounts.application;
 
-import br.com.pismo.account.domain.CreditLimit;
-import br.com.pismo.account.domain.WithdrawalLimit;
+import br.com.pismo.accounts.domain.CreditLimit;
+import br.com.pismo.accounts.domain.WithdrawalLimit;
 
 public class RequestParameter {
 
@@ -12,6 +12,8 @@ public class RequestParameter {
         this.availableCreditLimit = availableCreditLimit;
         this.availableWithdrawalLimit = availableWithdrawalLimit;
     }
+
+    protected RequestParameter() {}
 
     public CreditLimit getAvailableCreditLimit() {
         return availableCreditLimit;
