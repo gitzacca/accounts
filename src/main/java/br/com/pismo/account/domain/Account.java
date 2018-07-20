@@ -35,10 +35,10 @@ public class Account {
     }
 
     void addAvailableCreditLimit(CreditLimit creditLimit) {
-        availableCreditLimit.add(creditLimit.getAmount());
+        this.availableCreditLimit = availableCreditLimit.add(creditLimit.getAmount());
     }
 
     void addAvailableWithdrawalLimit(WithdrawalLimit withdrawalLimit) {
-        availableWithdrawalLimit.add(withdrawalLimit.getAmount());
+        this.availableWithdrawalLimit = availableWithdrawalLimit.add(withdrawalLimit.getAmount());
     }
 }

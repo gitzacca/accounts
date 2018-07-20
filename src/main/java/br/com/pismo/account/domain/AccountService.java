@@ -6,7 +6,7 @@ public interface AccountService {
 
     Account create(CreditLimit creditLimit, WithdrawalLimit withdrawalLimit);
 
-    void changeLimits(Long id, CreditLimit creditLimit, WithdrawalLimit withdrawalLimit);
+    Account changeLimits(Long id, CreditLimit creditLimit, WithdrawalLimit withdrawalLimit);
 
     List<Account> findAll();
 

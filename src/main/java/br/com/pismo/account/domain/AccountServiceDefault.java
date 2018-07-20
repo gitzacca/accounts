@@ -24,11 +24,13 @@ public class AccountServiceDefault implements AccountService {
     }
 
     @Override
-    public void changeLimits(Long id, CreditLimit creditLimit, WithdrawalLimit withdrawalLimit) {
+    public Account changeLimits(Long id, CreditLimit creditLimit, WithdrawalLimit withdrawalLimit) {
         Account account = repository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account with id: " + id + " not found"));
 
         account.addAvailableCreditLimit(creditLimit);
         account.addAvailableWithdrawalLimit(withdrawalLimit);
+
+        return account;
     }
 
     @Override
