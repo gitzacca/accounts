@@ -1,5 +1,7 @@
 package br.com.pismo.accounts.domain;
 
+import br.com.pismo.accounts.domain.exceptions.InsufficientFundsException;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -38,12 +40,24 @@ public class Account {
 
     void addAvailableCreditLimit(CreditLimit creditLimit) {
         if (creditLimit != null) {
-            this.availableCreditLimit = availableCreditLimit.add(creditLimit.getAmount());
+            BigDecimal newAvailableCreditLimit = availableCreditLimit.add(creditLimit.getAmount());
+
+            if (newAvailableCreditLimit.signum() < 0) {
+                throw new InsufficientFundsException("Insufficient funds for credit");
+            }
+
+            this.availableCreditLimit = newAvailableCreditLimit;
         }
     }
 
     void addAvailableWithdrawalLimit(WithdrawalLimit withdrawalLimit) {
         if (withdrawalLimit != null) {
+            BigDecimal newAvailableWithdrawalLimit = availableWithdrawalLimit.add(withdrawalLimit.getAmount());
+
+            if (newAvailableWithdrawalLimit.signum() < 0) {
+                throw new InsufficientFundsException("Insufficient funds for withdrawal");
+            }
+
             this.availableWithdrawalLimit = availableWithdrawalLimit.add(withdrawalLimit.getAmount());
         }
     }

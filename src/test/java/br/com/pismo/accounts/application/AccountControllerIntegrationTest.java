@@ -97,6 +97,30 @@ public class AccountControllerIntegrationTest {
 				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}
 
+	@Test
+	public void mustReturnError401WhenInsufficientFundsForCredit() throws Exception {
+		String requestBody = "{\"availableCreditLimit\": {\"amount\": -1001}}";
+		Account account = createTestAccount();
+
+		mockMvc.perform(MockMvcRequestBuilders.patch("/v1/accounts/" + account.getId())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(requestBody))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+	}
+
+	@Test
+	public void mustReturnError401WhenInsufficientFundsForWithdrawal() throws Exception {
+		String requestBody = "{\"availableWithdrawalLimit\": {\"amount\": -1001}}";
+		Account account = createTestAccount();
+
+		mockMvc.perform(MockMvcRequestBuilders.patch("/v1/accounts/" + account.getId())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(requestBody))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+	}
+
 	private Account createTestAccount() {
 		Account account = new Account(new CreditLimit(new BigDecimal(1000)), new WithdrawalLimit(new BigDecimal(1000)));
 		return repository.save(account);

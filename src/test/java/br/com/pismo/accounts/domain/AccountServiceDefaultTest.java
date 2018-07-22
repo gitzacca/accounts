@@ -1,6 +1,7 @@
 package br.com.pismo.accounts.domain;
 
 import br.com.pismo.accounts.domain.exceptions.AccountNotFoundException;
+import br.com.pismo.accounts.domain.exceptions.InsufficientFundsException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -120,6 +121,34 @@ public class AccountServiceDefaultTest {
 
         Assert.assertEquals(new BigDecimal(0), accountPersisted.getAvailableCreditLimit());
         Assert.assertEquals(new BigDecimal(0), accountPersisted.getAvailableWithdrawalLimit());
+    }
+
+    @Test(expected = InsufficientFundsException.class)
+    public void mustThrowExceptionWhenInsufficientFundsForCredit() {
+        CreditLimit creditLimit = new CreditLimit(new BigDecimal(500.00));
+        WithdrawalLimit withdrawalLimit = new WithdrawalLimit(new BigDecimal(500.00));
+        Account account = new Account(creditLimit, withdrawalLimit);
+
+        Mockito.when(accountRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(account));
+
+       service.changeLimits(1L,
+                new CreditLimit(new BigDecimal(-501.00)),
+                new WithdrawalLimit(new BigDecimal(0)));
+
+    }
+
+    @Test(expected = InsufficientFundsException.class)
+    public void mustThrowExceptionWhenInsufficientFundsForWithdrawal() {
+        CreditLimit creditLimit = new CreditLimit(new BigDecimal(500.00));
+        WithdrawalLimit withdrawalLimit = new WithdrawalLimit(new BigDecimal(500.00));
+        Account account = new Account(creditLimit, withdrawalLimit);
+
+        Mockito.when(accountRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(account));
+
+        service.changeLimits(1L,
+                new CreditLimit(new BigDecimal(0)),
+                new WithdrawalLimit(new BigDecimal(-501.00)));
+
     }
 
 }
