@@ -18,12 +18,12 @@ public class AccountController {
     }
 
     @PostMapping("/v1/accounts")
-    public Account save(@RequestBody RequestParameter params) {
+    public Account save(@RequestBody RequestParameters params) {
         return accountService.create(params.getAvailableCreditLimit(), params.getAvailableWithdrawalLimit());
     }
 
     @PatchMapping("/v1/accounts/{id}")
-    public Account update(@PathVariable Long id, @RequestBody RequestParameter params) {
+    public Account update(@PathVariable Long id, @RequestBody RequestParameters params) {
         return accountService.changeLimits(id, params.getAvailableCreditLimit(), params.getAvailableWithdrawalLimit());
     }
 
