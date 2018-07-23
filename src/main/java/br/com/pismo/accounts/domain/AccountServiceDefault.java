@@ -30,7 +30,7 @@ public class AccountServiceDefault implements AccountService {
         account.addAvailableCreditLimit(creditLimit);
         account.addAvailableWithdrawalLimit(withdrawalLimit);
 
-        return account;
+        return repository.save(account);
     }
 
     @Override
